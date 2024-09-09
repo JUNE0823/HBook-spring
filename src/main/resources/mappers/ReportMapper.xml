@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="hb.hbook.mapper.ReportMapper" >
+
+  <insert id="reportSave"
+          parameterType="hb.hbook.domain.ReportRequestDTO">
+    INSERT INTO HB_REPORT(bookname, content, discuss, user_id, teamname)
+    VALUES(#{bookname}, #{content}, #{discuss}, #{user_id}, #{teamname})
+  </insert>
+
+  <select id="getReportSameTeam"
+          parameterType="java.util.HashMap"
+          resultType="hb.hbook.domain.ReportResponseDTO">
+    select id, bookname, content, discuss, user_id
+    from  HB_REPORT
+    where teamname = #{teamname}
+  </select>
+
+
+  <update id="updateReport"
+          parameterType="hb.hbook.domain.ReportRequestDTO"
+  >
+    update HB_REPORT
+    set content = #{content}, discuss = #{discuss}
+    where user_id= #{user_id}
+  </update>
+</mapper>
