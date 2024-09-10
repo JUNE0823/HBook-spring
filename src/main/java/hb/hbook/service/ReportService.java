@@ -71,6 +71,10 @@ public class ReportService {
 
     return seletedDiscuss;
   }
+
+  public void delReport(Map<String, Integer> map) {
+    reportMapper.deleteReport(map);
+  }
   
 
 }

@@ -17,6 +17,8 @@ public interface ReportMapper {
 
   public void updateReport(ReportRequestDTO report);
 
+  public void deleteReport(Map<String, Integer> map);
+
   
   
 }

@@ -16,8 +16,6 @@
     from  HB_REPORT
     where teamname = #{teamname}
   </select>
-
-
   <update id="updateReport"
           parameterType="hb.hbook.domain.ReportRequestDTO"
   >
@@ -25,4 +23,9 @@
     set content = #{content}, discuss = #{discuss}
     where user_id= #{user_id}
   </update>
+  <delete id="deleteReport"
+          parameterType="java.util.HashMap">
+    delete from HB_REPORT
+    where user_id = #{id}
+  </delete>
 </mapper>

@@ -17,7 +17,7 @@ import hb.hbook.service.ReportService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,6 +63,13 @@ public class ReportController {
   }
 
   // 9. 글 삭제(굳이 안만들어도 8번기능으로 해결 될듯)
+  @DeleteMapping("{userid}")
+  public ResponseEntity<Void> deleteReport(@PathVariable("userid") Integer id){
+    Map<String, Integer> map = new HashMap<>();
+    map.put("id", id);
+    reportService.delReport(map);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
 
 
   // 10. 대화 주제 정하기
