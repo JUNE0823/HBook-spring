@@ -3,11 +3,21 @@
 
 <mapper namespace ="hb.hbook.mapper.UserMapper" >
 
-  <insert id="saveUser"
-          parameterType="hb.hbook.domain.UserRequestDTO">
+  <!-- <insert id="saveUser"
+          parameterType="hb.hbook.domain.UserRequestDTO"
+          resultType="hb.hbook.domain.UserResponseDTO">
     INSERT INTO HB_USER(username, age, job, teamname)
     VALUES(#{username}, #{age}, #{job}, #{teamname})
+  </insert> -->
+  <insert id="saveUser"
+        parameterType="hb.hbook.domain.UserRequestDTO"
+        useGeneratedKeys="true"
+        keyProperty="id">
+    INSERT INTO HB_USER(username, age, job, teamname)
+    VALUES(#{username}, #{age}, #{job}, #{teamname});
   </insert>
+
+
 
   <select id="selectUser"
           resultType="hb.hbook.domain.UserResponseDTO">
@@ -29,4 +39,12 @@
     delete from HB_USER
     where id = ${id}
   </delete>
+
+  <select id="selectUserRow"
+          parameterType="java.util.HashMap"
+          resultType="hb.hbook.domain.UserResponseDTO">
+    select id, username, age, job, teamname
+    from  HB_USER
+    where id = #{id}
+  </select>
 </mapper>

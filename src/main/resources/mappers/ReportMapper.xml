@@ -5,8 +5,8 @@
 
   <insert id="reportSave"
           parameterType="hb.hbook.domain.ReportRequestDTO">
-    INSERT INTO HB_REPORT(bookname, content, discuss, user_id, teamname)
-    VALUES(#{bookname}, #{content}, #{discuss}, #{user_id}, #{teamname})
+    INSERT INTO HB_REPORT(user_id, teamname)
+    VALUES(#{user_id}, #{teamname})
   </insert>
 
   <select id="getReportSameTeam"
@@ -28,4 +28,12 @@
     delete from HB_REPORT
     where user_id = #{id}
   </delete>
+
+  <select id="selectReport"
+          parameterType="java.util.HashMap"
+          resultType="hb.hbook.domain.ReportResponseDTO">
+    select id, bookname, content, discuss, user_id, teamname
+    from  HB_REPORT
+    where user_id = #{id}
+  </select>
 </mapper>

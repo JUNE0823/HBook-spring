@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -34,17 +37,25 @@ public class ReportController {
   private ReportService reportService;
 
   
-  // 6. 글 작성 
-  @PostMapping
-  public ResponseEntity<ReportRequestDTO> createReport(@RequestBody ReportRequestDTO report) {
-      reportService.reportSave(report);
+  // // 6. 글 작성 
+  // @PostMapping("/{id}")
+  // public ResponseEntity<ReportRequestDTO> createReport(@RequestBody ReportRequestDTO report) {
+  //   reportService.reportSave(report);
       
-      return new ResponseEntity<>(report, HttpStatus.OK);
-  }
+  //   return new ResponseEntity<>(report, HttpStatus.OK);
+  // }
   
+  // 6. 글 작성 
+  @PostMapping("/{id}")
+  public ResponseEntity<String> createReport(@RequestBody ReportRequestDTO report) {
+
+    reportService.reportSave(report);
+      
+    return new ResponseEntity<>("작성 완료", HttpStatus.OK);
+  }
 
   // 7. 글 조회
-  @GetMapping("/{teamname}")
+  @GetMapping("/team/{teamname}")
   public ResponseEntity<List<ReportResponseDTO>> selectReportSameTeam(@PathVariable("teamname") String teamname) {
     System.out.println("debug >>> selectUser excute");
     Map<String, String> map = new HashMap<>();
@@ -56,7 +67,7 @@ public class ReportController {
   }
   
   // 8. 글 수정
-  @PatchMapping
+  @PatchMapping("/{id}")
   public ResponseEntity<String> patchReport(@RequestBody ReportRequestDTO report){
     reportService.updateReport(report);
     return new ResponseEntity<>("수정 완료", HttpStatus.OK);
@@ -73,11 +84,20 @@ public class ReportController {
 
 
   // 10. 대화 주제 정하기
-  @GetMapping("/report/{teamname}")
+  @GetMapping("/discuss/{teamname}")
   public ResponseEntity<String> randomDiscuss(@PathVariable("teamname") String teamname) {
     Map<String, String> map = new HashMap<>();
     map.put("teamname", teamname);
     String response = reportService.randomDiscussPick(map);
+    return new ResponseEntity<>(response, HttpStatus.OK);
+  }
+  
+  // 11. 사용자 글 가져오기
+  @GetMapping("/{userid}")
+  public ResponseEntity<ReportResponseDTO> getReport(@PathVariable("userid") Integer id) {
+    Map<String, Integer> map = new HashMap<>();
+    map.put("id", id);
+    ReportResponseDTO response = reportService.getReportRow(map);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
   

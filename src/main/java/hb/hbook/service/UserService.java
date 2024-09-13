@@ -18,9 +18,9 @@ public class UserService {
   @Autowired
   private UserMapper userMapper;
 
-  public void saveUser(UserRequestDTO params) {
+  public Integer saveUser(UserRequestDTO params) {
     userMapper.saveUser(params);
-    
+    return params.getId();
   }
 
   public List<UserResponseDTO> getUser() {
@@ -35,6 +35,10 @@ public class UserService {
   public void deleteUser(Map<String, Integer> map) {
     
     userMapper.deleteUser(map);
+  }
+
+  public UserResponseDTO selectUser(Map<String, Integer> map) {
+    return userMapper.selectUserRow(map);
   }
   
 }

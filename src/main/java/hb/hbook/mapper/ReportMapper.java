@@ -19,6 +19,8 @@ public interface ReportMapper {
 
   public void deleteReport(Map<String, Integer> map);
 
+  public ReportResponseDTO selectReport(Map<String, Integer> map);
+
   
   
 }

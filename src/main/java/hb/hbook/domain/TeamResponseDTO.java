@@ -7,10 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserRequestDTO {
+public class TeamResponseDTO {
   private Integer  id;
-  private String   username;
-  private Integer  age;
-  private String   job;
   private String   teamname;
 }

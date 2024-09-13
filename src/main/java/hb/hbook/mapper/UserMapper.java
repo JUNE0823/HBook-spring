@@ -11,12 +11,14 @@ import hb.hbook.domain.UserResponseDTO;
 @Mapper
 public interface UserMapper {
 
-  public void saveUser(UserRequestDTO params);
+  public Integer saveUser(UserRequestDTO params);
 
   public List<UserResponseDTO> selectUser();
 
   public List<UserResponseDTO> getSameTeam(Map<String, String> map);
 
   public void deleteUser(Map<String, Integer> map);
+
+  public UserResponseDTO selectUserRow(Map<String, Integer> map);
 
 }

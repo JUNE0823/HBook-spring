@@ -75,6 +75,11 @@ public class ReportService {
   public void delReport(Map<String, Integer> map) {
     reportMapper.deleteReport(map);
   }
+
+  public ReportResponseDTO getReportRow(Map<String, Integer> map) {
+    
+    return reportMapper.selectReport(map);
+  }
   
 
 }

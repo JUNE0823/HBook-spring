@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -32,12 +34,24 @@ public class UserController {
 
 
   // 2. 사용자 등록
-  @PostMapping
-  public ResponseEntity<UserRequestDTO> createUser(@RequestBody UserRequestDTO params) {
-    System.out.println("debug >>> createUser : " + params);
-    userService.saveUser(params);
+  // @PostMapping
+  // public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO params) {
+  //   System.out.println("debug >>> createUser : " + params);
+  //   Integer generatedId = userService.saveUser(params);
+  //   UserResponseDTO response = new UserResponseDTO();
+  //   response.setId(generatedId);
+  //   return new ResponseEntity<>(response, HttpStatus.OK);
+  // }
 
-    return new ResponseEntity<>(params, HttpStatus.OK);
+  @PostMapping
+  public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO params) {
+    System.out.println("debug >>> createUser : " + params);
+    Integer generatedId = userService.saveUser(params);
+    UserResponseDTO response = new UserResponseDTO();
+    response.setId(generatedId);
+    response.setUsername(params.getUsername());
+    response.setTeamname(params.getTeamname());
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
   
   // 3. 사용자 전체 조회
@@ -50,7 +64,7 @@ public class UserController {
   
 
   // 4. 팀별 사용자 조회
-  @GetMapping("/{teamname}")
+  @GetMapping("/team/{teamname}")
   public ResponseEntity<List<UserResponseDTO>> selectSameTeam(@PathVariable("teamname") String teamname) {
     System.out.println("debug >>> selectUser excute");
     Map<String, String> map = new HashMap<>();
@@ -71,4 +85,13 @@ public class UserController {
     return new ResponseEntity<String>(id+" 번쨰 데이터 삭제", HttpStatus.OK);
   }
 
+  // 사용자 조회
+  @GetMapping("{id}")
+  public ResponseEntity<UserResponseDTO> selectUser(@PathVariable("id") Integer id) {
+    Map<String, Integer> map = new HashMap();
+    map.put("id", id);
+    UserResponseDTO result = userService.selectUser(map);
+    return new ResponseEntity<>(result, HttpStatus.OK);
+  }
+  
 }

@@ -20,9 +20,7 @@ public class BestBookItemDTO {
 
   @JsonProperty("description")
   private String description;
-
-  // 이미지 같은데 이걸 어떻게 활용하지
-  // 예시 "cover": "https://image.aladin.co.kr/product/28513/21/coversum/k882835835_1.jpg"
+  
   @JsonProperty("cover")
   private String cover;
 

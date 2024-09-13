@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="hb.hbook.mapper.TeamMapper">
+  <select id="selectTeamNames"
+          resultType="hb.hbook.domain.TeamResponseDTO">
+    select id, teamname
+    from  HB_team
+  </select>
+
+  <insert id="postTeam"
+          parameterType="hb.hbook.domain.TeamRequestDTO">
+    INSERT INTO HB_team(teamname)
+    VALUES(#{teamname})
+  </insert>
+</mapper>
