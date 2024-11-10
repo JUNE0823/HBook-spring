@@ -13,5 +13,7 @@ public interface TeamMapper {
   public List<TeamResponseDTO> selectTeamNames();
 
   public void postTeam(TeamRequestDTO params);
+
+  public void delTeam(String teamname);
   
 }

@@ -23,4 +23,9 @@ public class TeamService {
     teamMapper.postTeam(params);
     
   }
+
+  public void delTeam(String teamname) {
+    
+    teamMapper.delTeam(teamname);
+  }
 }

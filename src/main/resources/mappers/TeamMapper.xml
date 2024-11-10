@@ -13,4 +13,11 @@
     INSERT INTO HB_team(teamname)
     VALUES(#{teamname})
   </insert>
+
+  <delete id="delTeam"
+        parameterType="java.lang.String">
+    delete from HB_TEAM
+    where teamname = #{teamname}
+</delete>
+
 </mapper>

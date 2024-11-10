@@ -56,19 +56,6 @@ public class ReportService {
     }
     System.out.println("랜덤으로 선택된 값: " + seletedDiscuss);
 
-
-    // // Stream API로 찾아보기
-    // Optional<String> discussValue = response.stream()
-    // .filter(obj -> obj.getUser_id() == randomValue)  // user_id가 randomValue와 동일한 객체 필터링
-    // .map(ReportResponseDTO::getDiscuss)  // discuss 필드 추출
-    // .findFirst();  // 첫 번째 일치하는 값 찾기
-
-    // // 값이 존재하는지 확인 후 출력
-    // discussValue.ifPresentOrElse(
-    // value -> System.out.println("user_id가 " + randomValue + "인 discuss 값: " + value),
-    //   () -> System.out.println("해당 user_id를 찾을 수 없습니다.")
-    // );
-
     return seletedDiscuss;
   }
 

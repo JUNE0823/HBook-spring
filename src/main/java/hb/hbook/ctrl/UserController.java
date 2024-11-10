@@ -34,15 +34,6 @@ public class UserController {
 
 
   // 2. 사용자 등록
-  // @PostMapping
-  // public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO params) {
-  //   System.out.println("debug >>> createUser : " + params);
-  //   Integer generatedId = userService.saveUser(params);
-  //   UserResponseDTO response = new UserResponseDTO();
-  //   response.setId(generatedId);
-  //   return new ResponseEntity<>(response, HttpStatus.OK);
-  // }
-
   @PostMapping
   public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO params) {
     System.out.println("debug >>> createUser : " + params);
